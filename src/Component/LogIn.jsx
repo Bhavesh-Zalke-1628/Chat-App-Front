@@ -1,68 +1,3 @@
-// import React, { useState } from 'react'
-// import { FormControl, FormLabel, VStack, Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
-
-
-// function LogIn() {
-//     const [show, setShow] = useState(false)
-//     const [email, setEmail] = useState();
-//     const [conformPassword, setConformPassword] = useState();
-
-//     const handleClick = () => setShow(!show)
-//     const postDetails = (pic) => {
-
-//     }
-
-//     const submitHandler = () => {
-
-//     }
-//     return (
-//         <VStack spacing='5px' color='black'>
-//             <FormControl id='email' isRequired>
-//                 <FormLabel>Email</FormLabel>
-//                 <Input
-//                     placeholder='Enter your email'
-//                     onChange={(e) => setEmail(e.target.value)}
-//                 />
-//             </FormControl>
-
-//             <FormControl id='password' isRequired>
-//                 <FormLabel>Password</FormLabel>
-//                 <InputGroup>
-//                     <Input
-//                         type={show ? "text" : "password"}
-//                         placeholder='Enter your password'
-//                         onChange={(e) => setPassword(e.target.value)}
-//                     />
-//                     <InputRightElement width='4.5rem'>
-//                         <Button h='1.75rem' size='sm' onClick={handleClick}>
-//                             {show ? 'Hide' : 'Show'}
-//                         </Button>
-//                     </InputRightElement>
-//                 </InputGroup>
-//             </FormControl>
-//             <Button
-//                 colorScheme='blue'
-//                 w='100%'
-//                 style={{ marginTop: 15 }}
-//                 onClick={submitHandler}
-//             >
-//                 Log In
-//             </Button>
-//             <Button
-//                 colorScheme='red'
-//                 w='100%'
-//                 style={{ marginTop: 15 }}
-//                 onClick={submitHandler}
-//             >
-//                 Guest
-//             </Button>
-//         </VStack >
-//     )
-
-// }
-
-// export default LogIn
-
 
 import { Button } from "@chakra-ui/button";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
@@ -71,7 +6,7 @@ import { VStack } from "@chakra-ui/layout";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
-// import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router";
 // import { ChatState } from "../../Context/ChatProvider";
 
 const Login = () => {
@@ -81,12 +16,10 @@ const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
 
-    // const history = useHistory();
-    // const { setUser } = ChatState();
 
     const submitHandler = async () => {
-        setLoading(true);
         if (!email || !password) {
             toast({
                 title: "Please Fill all the Feilds",
@@ -95,44 +28,43 @@ const Login = () => {
                 isClosable: true,
                 position: "bottom",
             });
-            setLoading(false);
             return;
         }
 
+        console.log(email, password);
         try {
             const config = {
                 headers: {
                     "Content-type": "application/json",
                 },
             };
-
             const { data } = await axios.post(
                 "http://localhost:5000/api/user/login",
-                { email, password },
+                {
+                    email,
+                    password,
+                },
                 config
             );
-
+            console.log(data);
             toast({
-                title: "Login Successful",
+                title: "Registration Successful",
                 status: "success",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
             });
-            setUser(data);
             localStorage.setItem("userInfo", JSON.stringify(data));
-            setLoading(false);
-            history.push("/chats");
+            navigate('/chat')
         } catch (error) {
             toast({
                 title: "Error Occured!",
-                description: error.response.data.message,
+                description: error,
                 status: "error",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
             });
-            setLoading(false);
         }
     };
 
