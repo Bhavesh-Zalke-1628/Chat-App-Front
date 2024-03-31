@@ -6,7 +6,8 @@ import ChatBox from '../Component/Neccessary/ChatBox'
 import { ChatState } from '../Context/ChatProvider'
 
 function ChatPage() {
-    const user = ChatState()
+
+    const { user } = ChatState()
     console.log(user)
     return (
         <div

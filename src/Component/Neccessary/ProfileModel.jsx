@@ -3,12 +3,12 @@ import { Text, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFoo
 import { IconButton, Button } from '@chakra-ui/button'
 import React from 'react'
 import { useNavigate } from 'react-router'
+import { ChatState } from '../../Context/ChatProvider'
 
 function ProfileModel({ user, children }) {
     const navigate = useNavigate()
     const { isOpen, onClose, onOpen } = useDisclosure()
-
-
+    console.log('user', user.user.name)
     return (
         <>
             {
@@ -33,7 +33,7 @@ function ProfileModel({ user, children }) {
                         fontSize='40px'
                         display='flex'
                         justifyContent='center'
-                    >Bhavesh zalke</ModalHeader>
+                    >{user?.user?.name}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody
                         display='flex'
@@ -48,7 +48,7 @@ function ProfileModel({ user, children }) {
                             alt='bhavesh zalke'
                         />
                         <Text>
-                            Email
+                            Email : {user.user.email}
                         </Text>
                     </ModalBody>
                     <ModalFooter>
