@@ -8,6 +8,7 @@ import { ChatState } from '../../Context/ChatProvider'
 function ProfileModel({ user, children }) {
     const navigate = useNavigate()
     const { isOpen, onClose, onOpen } = useDisclosure()
+    console.log(user)
     console.log('user', user.user.name)
     return (
         <>
