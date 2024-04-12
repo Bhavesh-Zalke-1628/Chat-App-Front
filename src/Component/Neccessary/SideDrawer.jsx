@@ -1,7 +1,7 @@
 import { Box, Tooltip, Button, Text, Menu, MenuButton, MenuList, MenuItem, MenuDivider, Drawer, useDisclosure, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Input, Toast, useToast, Spinner } from '@chakra-ui/react';
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { Avatar } from '@chakra-ui/avatar'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import ProfileModel from './ProfileModel';
 import { useNavigate } from 'react-router';
@@ -57,33 +57,36 @@ function SideDrawer() {
         }
     }
 
-    const accesschat = async (userID) => {
-        try {
 
+    const accesschat = async (userId) => {
+        // console.log(userId);
+        console.log(user.token)
+        try {
             setloadingChat(true);
             const config = {
                 headers: {
-                    "Content-type": "Application/json",
-                    Authorization: `Bearer ${user.token}`
-
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
                 }
             };
-            const { data } = await axios.get(`http://localhost:5000/api/chat`, { userID }, config)
-            if (!chats.find((c) => c._id == data.id))
-                setChats([data, ...chats])
-            setloadingChat(false)
-            setSelectedChat(data)
-            onClose()
+
+            const { data } = await axios.post(`http://localhost:5000/api/chat`, { userId }, config)
+
+            if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
+            setSelectedChat(data);
+            setLoadingChat(false);
+            onClose();
         } catch (error) {
             toast({
-                title: 'error fething the chat',
+                title: "Error fetching the chat",
                 description: error.message,
+                status: "error",
                 duration: 5000,
                 isClosable: true,
-                position: "bottom-left"
-            })
+                position: "bottom-left",
+            });
         }
-    }
+    };
     return (
         <div>
             <Box
