@@ -59,22 +59,21 @@ function SideDrawer() {
 
 
     const accesschat = async (userId) => {
-        // console.log(userId);
+        // console.log(userId); 
         console.log(user.token)
         try {
             setloadingChat(true);
             const config = {
                 headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': `Bearer ${user.token}`
+                    authorization: `Bearer ${user.token}`
                 }
             };
 
             const { data } = await axios.post(`http://localhost:5000/api/chat`, { userId }, config)
-
+            console.log('data', data)
             if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
             setSelectedChat(data);
-            setLoadingChat(false);
+            setloadingChat(false)
             onClose();
         } catch (error) {
             toast({
