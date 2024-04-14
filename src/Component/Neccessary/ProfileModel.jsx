@@ -9,6 +9,7 @@ function ProfileModel({ user, children }) {
     const navigate = useNavigate()
     const { isOpen, onClose, onOpen } = useDisclosure()
     console.log(user)
+    console.log(children)
     return (
         <>
             {

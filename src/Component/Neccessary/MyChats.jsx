@@ -7,7 +7,8 @@ import axios from 'axios'
 import { AddIcon } from '@chakra-ui/icons'
 import ChatLoadingComponent from './ChatloadingComponent'
 import { getSender } from '../../Config/ChatLogic'
-function MyChats() {
+import GroupChatModel from './GroupChatModel'
+function MyChats({ fetchAgain }) {
     const [loggedUser, setLoggedUser] = useState('')
     const { user, selectedChat, setSelectedChat, chats, setChats, } = ChatState()
     const toast = useToast()
@@ -43,7 +44,7 @@ function MyChats() {
         console.log("hello")
         fetchChats();
         console.log('byyy')
-    }, []);
+    }, [fetchAgain]);
     console.log('loggedUser', loggedUser)
     useEffect(() => {
         setLoggedUser(JSON.parse(localStorage.getItem('userInfo')))
@@ -71,15 +72,16 @@ function MyChats() {
                 alignItems="center"
             >
                 My Chats
-                {/* <GroupChatModal> */}
-                <Button
-                    display="flex"
-                    fontSize={{ base: "17px", md: "10px", lg: "17px" }}
-                    rightIcon={<AddIcon />}
-                >
-                    New Group Chat
-                </Button>
-                {/* </GroupChatModal> */}
+                <GroupChatModel>
+                    <Button
+                        display="flex"
+                        fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+                        rightIcon={<AddIcon />}
+                    >
+                        New Group Chat
+                    </Button>
+                </GroupChatModel>
+
             </Box>
             <Box
                 display="flex"
@@ -106,8 +108,9 @@ function MyChats() {
                                 key={chat._id}
                             >
                                 <Text>
+                                    {console.log(loggedUser.user)}
                                     {!chat.isGroupChat
-                                        ? getSender(loggedUser, chat.users)
+                                        ? getSender(loggedUser.user, chat.users)
                                         : chat.chatName}
                                 </Text>
                                 {chat.latestMessage && (
