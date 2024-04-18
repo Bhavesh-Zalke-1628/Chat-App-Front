@@ -9,7 +9,6 @@ function ProfileModel({ user, children }) {
     const navigate = useNavigate()
     const { isOpen, onClose, onOpen } = useDisclosure()
     console.log(user)
-    console.log(children)
     return (
         <>
             {
@@ -34,7 +33,7 @@ function ProfileModel({ user, children }) {
                         fontSize='40px'
                         display='flex'
                         justifyContent='center'
-                    >{user?.user?.name}</ModalHeader>
+                    >{user?.name}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody
                         display='flex'
@@ -49,7 +48,8 @@ function ProfileModel({ user, children }) {
                             alt='bhavesh zalke'
                         />
                         <Text>
-                            Email : {user.user.email}
+                            {console.log(user)}
+                            Email : {user.email}
                         </Text>
                     </ModalBody>
                     <ModalFooter>

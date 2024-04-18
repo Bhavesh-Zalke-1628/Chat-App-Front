@@ -59,7 +59,8 @@ function SideDrawer() {
 
 
     const accesschat = async (userId) => {
-        // console.log(userId); 
+        console.log(userId);
+        console.log('accesschat')
         console.log(user.token)
         try {
             setloadingChat(true);

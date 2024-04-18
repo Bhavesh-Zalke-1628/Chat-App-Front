@@ -3,8 +3,14 @@ import { ChatState } from '../../Context/ChatProvider'
 import { Box, IconButton, Text } from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 
+import ProfileModel from './ProfileModel'
+import { getSender, getSenderFull } from '../../Config/ChatLogic'
+import GroupChatModal from './UpdateGroupChatModal'
+
 function SingleChat({ fetchAgain, setFetchAgain }) {
     const { user, selectedChat, setSelectedChat } = ChatState()
+    console.log('selectedChat', selectedChat)
+    console.log(user)
     return (
         <>
             {
@@ -25,18 +31,42 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
                                 icon={<ArrowBackIcon />}
                                 onClick={() => selectedChat('')}
                             />
+                            {console.log(!selectedChat.isGroupChat)}
                             {
-                                !selectedChat.isGroupChat ? (
-                                    <>
-
-                                    </>
-                                ) : (
-                                    <>
-                                        33.17
-                                    </>
-                                )
+                                (!selectedChat.isGroupChat
+                                    ?
+                                    (
+                                        <>
+                                            {getSender(user, selectedChat.users)}
+                                            <ProfileModel
+                                                user={getSenderFull(user, selectedChat.users)}
+                                            />
+                                        </>
+                                    ) : (
+                                        <>
+                                            {selectedChat.chatName.toUpperCase()}
+                                            <GroupChatModal
+                                                fetchMessages={fetchMessages}
+                                                fetchAgain={fetchAgain}
+                                                setFetchAgain={setFetchAgain}
+                                            />
+                                        </>
+                                    ))
                             }
                         </Text>
+                        <Box
+                            display="flex"
+                            flexDir="column"
+                            justifyContent="flex-end"
+                            p={3}
+                            bg="#E8E8E8"
+                            w="100%"
+                            h="100%"
+                            borderRadius="lg"
+                            overflowY="hidden"
+                        >
+                            {/* msg here  */}
+                        </Box>
                     </>
                 ) : (
                     <Box
