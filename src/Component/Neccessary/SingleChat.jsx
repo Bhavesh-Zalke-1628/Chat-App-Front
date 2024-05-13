@@ -31,12 +31,15 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
                                 icon={<ArrowBackIcon />}
                                 onClick={() => selectedChat('')}
                             />
-                            {console.log(!selectedChat.isGroupChat)}
+                            {console.log(selectedChat.isGroupChat)}
                             {
                                 (!selectedChat.isGroupChat
                                     ?
                                     (
                                         <>
+                                            {
+                                                console.log(getSender(user, selectedChat.users))
+                                            }
                                             {getSender(user, selectedChat.users)}
                                             <ProfileModel
                                                 user={getSenderFull(user, selectedChat.users)}
@@ -45,11 +48,11 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
                                     ) : (
                                         <>
                                             {selectedChat.chatName.toUpperCase()}
-                                            <GroupChatModal
+                                            {/* <GroupChatModal
                                                 fetchMessages={fetchMessages}
                                                 fetchAgain={fetchAgain}
                                                 setFetchAgain={setFetchAgain}
-                                            />
+                                            /> */}
                                         </>
                                     ))
                             }

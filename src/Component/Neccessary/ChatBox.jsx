@@ -16,8 +16,6 @@ function ChatBox({ fetchAgain, setFetchAgain }) {
             w={{ base: '100%', md: '68%' }}
         >
             {console.log(fetchAgain)}
-            {/* {console.log(fetchAgain)} */}
-
             <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
         </Box>
     )

@@ -188,7 +188,6 @@ function SideDrawer() {
                         {loadingChat && <Spinner ml='auto' display="flex" />}
                     </DrawerBody>
                 </DrawerContent>
-
             </Drawer>
         </div >
     )
