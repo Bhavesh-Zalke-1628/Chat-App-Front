@@ -8,7 +8,6 @@ import { ChatState } from '../../Context/ChatProvider'
 function ProfileModel({ user, children }) {
     const navigate = useNavigate()
     const { isOpen, onClose, onOpen } = useDisclosure()
-    console.log(user)
     return (
         <>
             {
@@ -48,7 +47,6 @@ function ProfileModel({ user, children }) {
                             alt='bhavesh zalke'
                         />
                         <Text>
-                            {console.log(user)}
                             Email : {user.email}
                         </Text>
                     </ModalBody>

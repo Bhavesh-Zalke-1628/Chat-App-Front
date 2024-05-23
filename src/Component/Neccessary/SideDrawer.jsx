@@ -183,7 +183,6 @@ function SideDrawer() {
                                     />
                                 ))
                             )
-                            // console.log(searchResult.data)
                         }
                         {loadingChat && <Spinner ml='auto' display="flex" />}
                     </DrawerBody>

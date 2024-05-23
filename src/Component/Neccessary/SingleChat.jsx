@@ -9,8 +9,7 @@ import GroupChatModal from './UpdateGroupChatModal'
 
 function SingleChat({ fetchAgain, setFetchAgain }) {
     const { user, selectedChat, setSelectedChat } = ChatState()
-    console.log('selectedChat', selectedChat)
-    console.log(user)
+
     return (
         <>
             {
@@ -29,18 +28,18 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
                             <IconButton
                                 display={{ base: 'flex', md: 'none' }}
                                 icon={<ArrowBackIcon />}
-                                onClick={() => selectedChat('')}
+                                onClick={() => setSelectedChat('')}
                             />
-                            {console.log(selectedChat.isGroupChat)}
                             {
                                 (!selectedChat.isGroupChat
                                     ?
                                     (
                                         <>
+                                            {console.log(user.user)}
+                                            {console.log(selectedChat.users)}
                                             {
-                                                console.log(getSender(user, selectedChat.users))
+                                                getSender(user.user, selectedChat.users)
                                             }
-                                            {getSender(user, selectedChat.users)}
                                             <ProfileModel
                                                 user={getSenderFull(user, selectedChat.users)}
                                             />

@@ -14,6 +14,7 @@ function MyChats({ fetchAgain }) {
     const toast = useToast()
     const fetchChats = async () => {
         console.log('user', user.token);
+        console.log('chats', chats)
         try {
             const config = {
                 headers: {
