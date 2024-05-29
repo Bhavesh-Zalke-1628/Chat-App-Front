@@ -28,7 +28,6 @@ function GroupChatModel({ children }) {
                 }
             }
             const { data } = await axios.get(`http://localhost:5000/api/user?search=${search}`, config)
-            console.log(data)
             setLoading(false)
             setSearchResult(data)
         }
@@ -68,7 +67,6 @@ function GroupChatModel({ children }) {
                 },
                 config
             );
-            console.log(data)
             setChats([data, ...Chats]);
             onClose();
             toast({

@@ -37,7 +37,6 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
 
 
     const loggedUser = JSON.parse(localStorage.getItem('userInfo'))
-    console.log('loggedUser', loggedUser.user)
 
     const handleSearch = async (query) => {
         setSearch(query);
@@ -53,7 +52,6 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 },
             };
             const { data } = await axios.get(`http://localhost:5000/api/user?search=${search}`, config);
-            console.log(data);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -88,7 +86,6 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 config
             );
 
-            console.log(data._id);
             setSelectedChat(data);
             setFetchAgain(!fetchAgain);
             setRenameLoading(false);
@@ -117,8 +114,6 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
             });
             return;
         }
-        console.log(selectedChat.groupAdmin._id)
-        console.log(user._id)
         if (selectedChat.groupAdmin._id !== loggedUser.user._id) {
             toast({
                 title: "Only admins can add someone!",

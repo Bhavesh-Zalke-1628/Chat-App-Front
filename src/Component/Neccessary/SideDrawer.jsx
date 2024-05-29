@@ -16,7 +16,6 @@ function SideDrawer() {
     const [loading, setloading] = useState(false);
     const [loadingChat, setloadingChat] = useState('');
     const { user, setSelectedChat, chats, setChats, } = ChatState()
-    console.log(user)
     const logOutHandler = () => {
         localStorage.removeItem('userInfo');
         navigate('/');

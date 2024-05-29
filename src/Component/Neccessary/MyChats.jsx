@@ -13,8 +13,6 @@ function MyChats({ fetchAgain }) {
     const { user, selectedChat, setSelectedChat, chats, setChats, } = ChatState()
     const toast = useToast()
     const fetchChats = async () => {
-        console.log('user', user.token);
-        console.log('chats', chats)
         try {
             const config = {
                 headers: {
@@ -38,16 +36,9 @@ function MyChats({ fetchAgain }) {
 
 
     useEffect(() => {
-        console.log(JSON.parse(localStorage.getItem("userInfo")))
         setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
-        // console.log(log)
-        console.log('loggedUser', loggedUser)
-        console.log("hello")
         fetchChats();
-        console.log('byyy')
     }, [fetchAgain]);
-    console.log('loggedUser', loggedUser)
-
 
 
     return (
@@ -93,7 +84,6 @@ function MyChats({ fetchAgain }) {
                 borderRadius="lg"
                 overflowY="hidden"
             >
-                {console.log(chats)}
                 {chats ? (
                     <Stack overflowY="scroll">
                         {chats.map((chat) => (
@@ -108,7 +98,6 @@ function MyChats({ fetchAgain }) {
                                 key={chat._id}
                             >
                                 <Text>
-                                    {console.log(loggedUser.user)}
                                     {!chat.isGroupChat
                                         ? getSender(loggedUser.user, chat.users)
                                         : chat.chatName}
