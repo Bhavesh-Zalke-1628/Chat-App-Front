@@ -47,7 +47,7 @@ function ProfileModel({ user, children }) {
                             alt='bhavesh zalke'
                         />
                         <Text>
-                            Email : {user.email}
+                            {/* Email : {user.email} */}
                         </Text>
                     </ModalBody>
                     <ModalFooter>

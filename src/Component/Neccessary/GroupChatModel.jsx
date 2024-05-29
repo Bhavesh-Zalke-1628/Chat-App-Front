@@ -143,6 +143,7 @@ function GroupChatModel({ children }) {
                                     handleFunction={() => handleDelete(u)}
                                 />
                             ))}
+
                         </Box>
                         {loading ? (
                             // <ChatLoading />
