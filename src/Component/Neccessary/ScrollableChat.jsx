@@ -12,8 +12,8 @@ const ScrollableChat = ({ messages }) => {
             {messages &&
                 messages.map((m, i) => (
                     <div style={{ display: "flex" }} key={m._id}>
-                        {(isSameSender(messages, m, i, user._id) ||
-                            isLastMessage(messages, i, user._id)) && (
+                        {(isSameSender(messages, m, i, user.user._id) ||
+                            isLastMessage(messages, i, user.user._id)) && (
                                 <Tooltip label={m.sender.name} placement="bottom-start" hasArrow>
                                     <Avatar
                                         mt="15px"
@@ -27,14 +27,15 @@ const ScrollableChat = ({ messages }) => {
                             )}
                         <span
                             style={{
-                                backgroundColor: `${m.sender._id === user._id ? "#BEE3F8" : "#B9F5D0"}`,
-                                marginLeft: isSameSenderMargin(messages, m, i, user._id),
-                                marginTop: isSameUser(messages, m, i, user._id) ? 3 : 10,
+                                backgroundColor: `${m.sender._id === user.user._id ? "#BEE3F8" : "#B9F5D0"}`,
+                                marginLeft: isSameSenderMargin(messages, m, i, user.user._id),
+                                marginTop: isSameUser(messages, m, i, user.user._id) ? 3 : 10,
                                 borderRadius: "20px",
                                 padding: "5px 15px",
                                 maxWidth: "100%",
                             }}
                         >
+                            {console.log('user', user.user)}
                             {m.content}
                         </span>
                     </div>
